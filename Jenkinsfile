@@ -1,24 +1,29 @@
 pipeline {
-	agent any
-	
-	tools {
-		'maven-398'
-	}
-	
-	stages {
-		
-		stage('checkout') {
-			git url: 'https://github.com/HumayunChaudhary/jenkins-hello-world', branch: 'main'
-		}
-		
-		stage('build') {
-			steps {
-				sh 'mvn clean package -DskipTests'
-			}
-	}
-	
-		stage('test') {
-			steps {
-				sh 'mvn test'
-			}
+    agent any
+
+    tools {
+        maven 'maven-398'
+    }
+
+    stages {
+
+        stage('checkout') {
+            steps {
+                git url: 'https://github.com/HumayunChaudhary/jenkins-hello-world.git', branch: 'main'
+            }
+        }
+
+        stage('build') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+    }
 }
